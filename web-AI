@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ROTEC — Bespoke AI for Developers</title>
+    <meta name="description"
+        content="ROTEC crafts bespoke AI models, tools, and platforms with a luxury, minimal aesthetic. Built for developers who demand perfection." />
+    <meta name="theme-color" content="#0a0c0f">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="canonical" href="https://rotec.example/">
+    <meta property="og:title" content="ROTEC — Bespoke AI for Developers">
+    <meta property="og:description" content="Bespoke AI models, tools, and platform with a luxury, minimal aesthetic.">
+    <meta property="og:image" content="https://yourcdn.example/og-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Preload hero for faster LCP -->
+    <link rel="preload" as="image"
+        href="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85">
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ROTEC Platform",
+    "applicationCategory": "AI",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+  }
+  </script>
+
+    <style>
+        :root {
+            --bg: #0a0c0f;
+            --fg: #e8ecf3;
+            --muted: #a2adbd;
+            --line: #21262c;
+            --gold: #c9a86a;
+            --gold-2: #e6c788;
+            --panel: #0f1318;
+            --radius: 16px;
+            --grid: 1320px;
+        }
+
+        /* Light theme */
+        [data-theme="light"] {
+            --bg: #f7f9fc;
+            --fg: #0b0e14;
+            --muted: #5b6b7e;
+            --line: #dfe6ef;
+            --panel: #ffffff;
+            --gold: #b78b45;
+            --gold-2: #d8b46d;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            scroll-behavior: smooth
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: var(--grid);
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        /* Top Nav */
+        .nav {
+            position: fixed;
+            inset: auto 0 0 0;
+            top: 0;
+            z-index: 50;
+            background: linear-gradient(180deg, rgba(10, 12, 15, .85), rgba(10, 12, 15, .1));
+            backdrop-filter: saturate(160%);
+            border-bottom: 1px solid rgba(201, 168, 106, .18)
+        }
+
+        .nav .row {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: conic-gradient(from 210deg, var(--gold), var(--gold-2), var(--gold));
+            box-shadow: 0 0 0 1px rgba(201, 168, 106, .35) inset
+        }
+
+        .menu {
+            display: flex;
+            gap: 22px;
+            align-items: center
+        }
+
+        .menu a {
+            color: var(--muted)
+        }
+
+        .menu a:hover {
+            color: var(--fg)
+        }
+
+        .cta {
+            padding: 10px 14px;
+            border: 1px solid rgba(201, 168, 106, .6);
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(201, 168, 106, .15), rgba(201, 168, 106, .05));
+            box-shadow: inset 0 0 0 1px rgba(201, 168, 106, .2)
+        }
+
+        .toggle {
+            border-radius: 999px;
+            border: 1px solid rgba(201, 168, 106, .35);
+            padding: 8px 12px;
+            background: transparent;
+            color: var(--muted)
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            overflow: hidden
+        }
+
+        .hero .bg {
+            position: absolute;
+            inset: -10vh -10vw;
+            z-index: -1
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(105%) contrast(105%) brightness(.7);
+            transform: translateY(var(--py, 0px));
+            will-change: transform;
+            image-rendering: auto
+        }
+
+        .veil {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(1200px 600px at 50% 20%, rgba(201, 168, 106, .18), transparent 60%)
+        }
+
+        .hero .wrap {
+            position: relative;
+            text-align: center
+        }
+
+        .overline {
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700
+        }
+
+        .display {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 7vw, 92px);
+            line-height: 1.02;
+            margin: .1em 0 .2em;
+            background: linear-gradient(180deg, #fff, #d9e2f2 40%, #a2adbd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+
+        .lead {
+            color: var(--muted);
+            max-width: 70ch;
+            margin: 0 auto;
+            font-size: clamp(16px, 2.2vw, 20px)
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 22px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            height: 44px;
+            padding: 0 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(201, 168, 106, .55);
+            background: linear-gradient(180deg, rgba(201, 168, 106, .18), rgba(201, 168, 106, .06));
+            color: #fff
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--gold)
+        }
+
+        /* Signature line */
+        .sig {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            align-items: center;
+            margin: 38px 0 0 0;
+            color: var(--muted)
+        }
+
+        .sig i {
+            height: 1px;
+            width: 42px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent)
+        }
+
+        /* Sections */
+        .section {
+            padding: 90px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        h2.section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4.8vw, 56px);
+            margin: 0 0 8px
+        }
+
+        .kicker {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: .22em;
+            font-weight: 700
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 18px
+        }
+
+        /* Cards */
+        .card {
+            grid-column: span 6;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02));
+            border: 1px solid rgba(201, 168, 106, .18);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative
+        }
+
+        .card.tall {
+            grid-column: span 12
+        }
+
+        .card .media {
+            aspect-ratio: 16/9;
+            background: #0c1015
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            image-rendering: auto
+        }
+
+        .card .body {
+            padding: 18px
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(201, 168, 106, .3);
+            background: rgba(201, 168, 106, .08);
+            color: var(--gold);
+            font-size: 12px
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 22px;
+            margin: 10px 0
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        /* Banner */
+        .banner {
+            position: relative;
+            border: 1px solid rgba(201, 168, 106, .2);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: radial-gradient(1200px 500px at 80% 20%, rgba(201, 168, 106, .15), transparent 60%), linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, .01))
+        }
+
+        .banner .wrap {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 22px;
+            align-items: center
+        }
+
+        .banner .illustration {
+            aspect-ratio: 4/3
+        }
+
+        /* Marquee */
+        .marquee {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden
+        }
+
+        .marquee .track {
+            display: flex;
+            gap: 28px;
+            padding: 18px 0;
+            animation: roll 28s linear infinite
+        }
+
+        .chip {
+            padding: 8px 12px;
+            border: 1px solid rgba(201, 168, 106, .25);
+            border-radius: 999px;
+            color: var(--muted);
+            background: rgba(255, 255, 255, .02)
+        }
+
+        @keyframes roll {
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            color: var(--muted);
+            border-top: 1px solid var(--line)
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .6s ease, transform .6s ease
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: none
+        }
+
+        /* Docs / Playground / Pricing */
+        .cols {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 22px
+        }
+
+        .kbd {
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 2px 6px;
+            border-radius: 6px
+        }
+
+        pre.code {
+            background: #0c1015;
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 14px;
+            border-radius: 12px;
+            overflow: auto
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .table th,
+        .table td {
+            border-bottom: 1px solid var(--line);
+            padding: 10px;
+            text-align: left
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 800
+        }
+
+        .notice {
+            border: 1px dashed rgba(201, 168, 106, .35);
+            border-radius: 12px;
+            padding: 12px;
+            color: var(--muted)
+        }
+
+        /* Utilities */
+        .visually-hidden {
+            position: absolute;
+            left: -9999px
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            .marquee .track {
+                animation: none;
+                transform: none
+            }
+
+            .hero img {
+                transform: none !important
+            }
+        }
+
+        @media (max-width:960px) {
+            .grid {
+                grid-template-columns: repeat(6, 1fr)
+            }
+
+            .card {
+                grid-column: span 6
+            }
+
+            .banner .wrap,
+            .cols {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Skip to content for accessibility -->
+    <a href="#collection" class="visually-hidden" onfocus="this.style.left='12px'">Skip to content</a>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="wrap row">
+            <div class="row" style="display:flex;align-items:center;gap:14px">
+                <div class="mark" aria-hidden="true"></div>
+                <a class="brand" href="#" aria-label="ROTEC home">ROTEC</a>
+            </div>
+            <div class="menu" role="navigation" aria-label="Primary">
+                <a href="#collection">Models</a>
+                <a href="#platform">Platform</a>
+                <a href="#docs">Docs</a>
+                <a href="#playground">Playground</a>
+                
+                <a href="#changelog">Changelog</a>
+                <a class="cta" href="#contact">Request Access</a>
+                <button id="theme-toggle" class="toggle" aria-pressed="false" title="Toggle theme">☀︎ / ☾</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero" id="hero" aria-label="Intro">
+        <div class="bg">
+            <picture>
+                <source
+                    srcset="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85"
+                    media="(min-width:1200px)">
+                <source
+                    srcset="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85 1x, https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2400&q=85 2x"
+                    media="(min-width:768px)">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85"
+                    alt="Hero background" decoding="async" fetchpriority="high">
+            </picture>
+        </div>
+        <div class="veil" aria-hidden="true"></div>
+        <div class="wrap">
+            <div class="overline">Rotec Intelligence</div>
+            <h1 class="display">Rotec for AI Developers</h1>
+            <p class="lead">We craft purposeful models, refined tooling, and an orchestrated platform so your product
+                feels inevitable. Precision engineering. Couture experience.</p>
+            <div class="hero-ctas">
+                <a class="btn" href="#collection">Explore Models</a>
+                <a class="btn ghost" href="#playground">Try Playground</a>
+            </div>
+            <div class="sig"><i></i><span>Elegance in every token</span><i></i></div>
+        </div>
+    </header>
+
+    <!-- LIVE DEMO (simple sentiment, kept) -->
+    <section class="section" id="demo">
+        <div class="wrap">
+            <div class="kicker">Rotec</div>
+            <h2 class="section-title">Try Sentiment in 1 Click</h2>
+            <p class="muted" style="max-width:70ch">Type a sentence and see a toy model classify it. Swap the endpoint
+                for your own model/provider later.</p>
+            <div class="card" style="padding:18px;display:grid;gap:12px">
+                <label for="demo-text" class="muted">Enter text</label>
+                <textarea id="demo-text" rows="4" style="width:100%"
+                    placeholder="e.g., I love how fast this is!"></textarea>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <button class="btn" id="demo-run">Analyze</button>
+                    <span id="demo-status" class="muted" aria-live="polite"></span>
+                </div>
+                <pre id="demo-out" class="muted" style="white-space:pre-wrap"></pre>
+            </div>
+            <p class="notice" style="margin-top:10px">Heads‑up: if there’s no backend at <span
+                    class="kbd">/api/predict</span>, we’ll simulate a response so you can still play.</p>
+        </div>
+    </section>
+
+    <!-- MODEL COLLECTION -->
+    <section class="section" id="collection">
+        <div class="wrap">
+            <div class="kicker">Collection</div>
+            <h2 class="section-title">The Rotec Lineup</h2>
+            <p class="muted" style="max-width:70ch">Flagship models designed like coachbuilt machines. Tuned for
+                reliability, silence, and effortless power.</p>
+            <div class="grid" style="margin-top:18px">
+                <article class="card reveal">
+                    <div class="media">
+                        <picture>
+                            <source
+                                srcset="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=2400&q=85 1x, https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=3200&q=85 2x">
+                            <img alt="Phantom LLM"
+                                src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1600&q=85"
+                                loading="lazy" decoding="async">
+                        </picture>
+                    </div>
+                    <div class="body">
+                        <span class="pill">Flagship</span>
+                        <div class="title">Phantom LLM</div>
+                        <div class="muted">Large‑context reasoning with whisper‑quiet latency. For executive‑grade
+                            experiences.</div>
+                    </div>
+                </article>
+                <article class="card reveal">
+                    <div class="media">
+                        <picture>
+                            <source
+                                srcset="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=85 1x, https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=3200&q=85 2x">
+                            <img alt="Ghost Agent"
+                                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85"
+                                loading="lazy" decoding="async">
+                        </picture>
+                    </div>
+                    <div class="body">
+                        <span class="pill">Orchestrator</span>
+                        <div class="title">Ghost Agent</div>
+                        <div class="muted">Autonomous workflow execution with human‑level taste. Secure, auditable,
+                            dependable.</div>
+                    </div>
+                </article>
+                <article class="card reveal">
+                    <div class="media">
+                        <picture>
+                            <source
+                                srcset="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=2400&q=85 1x, https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=3200&q=85 2x">
+                            <img alt="Wraith Vision"
+                                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=85"
+                                loading="lazy" decoding="async">
+                        </picture>
+                    </div>
+                    <div class="body">
+                        <span class="pill">Vision</span>
+                        <div class="title">Wraith Vision</div>
+                        <div class="muted">Multimodal perception with cinematic color science and robust OCR in the
+                            wild.</div>
+                    </div>
+                </article>
+                <article class="card reveal">
+                    <div class="media">
+                        <picture>
+                            <source
+                                srcset="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2400&q=85 1x, https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=3200&q=85 2x">
+                            <img alt="Dawn Studio"
+                                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=85"
+                                loading="lazy" decoding="async">
+                        </picture>
+                    </div>
+                    <div class="body">
+                        <span class="pill">Developer Suite</span>
+                        <div class="title">Dawn Studio</div>
+                        <div class="muted">Local tools, SDKs, and test benches that feel hand‑polished. Build without
+                            friction.</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATFORM BANNER -->
+    <section class="section banner" id="platform">
+        <div class="wrap">
+            <div>
+                <div class="kicker">Platform</div>
+                <h2 class="section-title">Silent Powertrain</h2>
+                <p class="muted">A zero‑noise serving stack with adaptive routing, token‑aware caching, confidential
+                    compute, and observability designed like a chronograph. It just disappears.</p>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+                    <span class="pill">Confidential Compute</span>
+                    <span class="pill">Realtime Streams</span>
+                    <span class="pill">Multi‑Model Router</span>
+                    <span class="pill">Audit Trails</span>
+                </div>
+                <div style="display:flex;gap:12px;margin-top:22px;flex-wrap:wrap">
+                    <a class="btn" href="#docs">Read the docs</a>
+                    <a class="btn ghost" href="#contact">Talk to engineering</a>
+                </div>
+            </div>
+            <div class="illustration" aria-hidden="true">
+                <picture>
+                    <source
+                        srcset="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=2400&q=85 1x, https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=3200&q=85 2x">
+                    <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1600&q=85"
+                        alt="Platform illustration" loading="lazy" decoding="async">
+                </picture>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-label="Capabilities">
+        <div class="track wrap">
+            <span class="chip">Latency &lt; 100ms</span>
+            <span class="chip">99.99% SLO</span>
+            <span class="chip">Data Residency</span>
+            <span class="chip">Edge Inference</span>
+            <span class="chip">Private Fine‑tuning</span>
+            <span class="chip">Guardrails</span>
+            <span class="chip">A/B Harness</span>
+            <span class="chip">Observability</span>
+            <span class="chip">RBAC</span>
+            <span class="chip">On‑prem or Cloud</span>
+            <span class="chip">SDKs: JS • Python • Go</span>
+            <span class="chip">Latency &lt; 100ms</span>
+            <span class="chip">99.99% SLO</span>
+        </div>
+    </div>
+
+    <!-- DOCS -->
+    <section class="section" id="docs">
+        <div class="wrap">
+            <div class="kicker">Docs</div>
+            <h2 class="section-title">Developer Quickstart</h2>
+            <div class="cols">
+                <div class="card" style="padding:18px">
+                    <div class="title">Install SDK</div>
+                    <pre class="code"><code>npm i rotec-ai
+# or
+pip install rotec-ai</code></pre>
+                    <div class="title">Use in JavaScript</div>
+                    <pre class="code"><code>import { Rotec } from 'rotec-ai'
+const rt = new Rotec({ apiKey: process.env.ROTEC_KEY })
+const out = await rt.chat({ model:'phantom', messages:[{role:'user', content:'Hello'}] })
+console.log(out.choices[0].message)</code></pre>
+                    <div class="title">Use in Python</div>
+                    <pre class="code"><code>from rotec_ai import Rotec
+rt = Rotec(api_key=ROTEC_KEY)
+out = rt.chat(model="phantom", messages=[{"role":"user","content":"Hello"}])
+print(out["choices"][0]["message"])</code></pre>
+                    <p class="muted">See the full API in the <a href="#playground">Playground</a> below.</p>
+                </div>
+                <div class="card" style="padding:18px;display:grid;gap:10px">
+                    <div class="title">Auth & Endpoints</div>
+                    <table class="table">
+                        <tr>
+                            <th>Base URL</th>
+                            <td><span class="kbd">https://api.rotec.example/v1</span></td>
+                        </tr>
+                        <tr>
+                            <th>Header</th>
+                            <td><span class="kbd">Authorization: Bearer &lt;key&gt;</span></td>
+                        </tr>
+                        <tr>
+                            <th>Models</th>
+                            <td><span class="kbd">phantom</span>, <span class="kbd">ghost-agent</span>, <span
+                                    class="kbd">wraith-vision</span></td>
+                        </tr>
+                    </table>
+                    <div class="title">Curl</div>
+                    <pre class="code"><code>curl -X POST https://api.rotec.example/v1/chat \
+ -H "Authorization: Bearer $ROTEC_KEY" \
+ -H "Content-Type: application/json" \
+ -d '{
+  "model": "phantom",
+  "messages":[{"role":"user","content":"Hello"}]
+}'</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLAYGROUND -->
+    <section class="section" id="playground">
+        <div class="wrap">
+            <div class="kicker">Playground</div>
+            <h2 class="section-title">Experiment with the API</h2>
+            <div class="card" style="padding:18px;display:grid;gap:12px">
+                <div style="display:grid;gap:10px">
+                    <label class="muted">Endpoint</label>
+                    <input id="pg-endpoint" value="/api/predict"
+                        style="padding:10px;border-radius:10px;border:1px solid rgba(201,168,106,.3);background:#0c1015;color:#e8ecf3">
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+                    <label>Model
+                        <select id="pg-model"
+                            style="padding:10px;border-radius:10px;border:1px solid rgba(201,168,106,.3);background:#0c1015;color:#e8ecf3">
+                            <option value="phantom">phantom</option>
+                            <option value="ghost-agent">ghost-agent</option>
+                            <option value="wraith-vision">wraith-vision</option>
+                        </select>
+                    </label>
+                    <label>Temperature
+                        <input id="pg-temp" type="range" min="0" max="1" step="0.05" value="0.7">
+                    </label>
+                </div>
+                <label class="muted" for="pg-input">Prompt</label>
+                <textarea id="pg-input" rows="5" placeholder="Ask anything…" style="width:100%"></textarea>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <button class="btn" id="pg-run">Run</button>
+                    <span id="pg-status" class="muted" aria-live="polite"></span>
+                </div>
+                <pre id="pg-out" class="code" style="white-space:pre-wrap"></pre>
+            </div>
+            <p class="notice" style="margin-top:10px">Tip: point the endpoint to your backend (Node/Flask/FastAPI). If
+                unreachable, we’ll return a mocked response.</p>
+        </div>
+    </section>
+
+ 
+  
+    <!-- CHANGELOG -->
+    <section class="section" id="changelog">
+        <div class="wrap">
+            <div class="kicker">Changelog</div>
+            <h2 class="section-title">What’s new</h2>
+            <div class="card" style="padding:18px">
+                <ul>
+                    <li><strong>v0.3</strong> — Added Playground, Pricing, Security pages and theme toggle.</li>
+                    <li><strong>v0.2</strong> — Improved hero performance and reveal animations.</li>
+                    <li><strong>v0.1</strong> — Initial luxury landing with models & platform banner.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / REQUEST ACCESS FORM -->
+    <section class="section" id="contact">
+        <div class="wrap">
+            <div class="kicker">Contact</div>
+            <h2 class="section-title">Request Access</h2>
+            <form id="access-form" class="card" style="padding:18px;display:grid;gap:10px">
+                <label class="muted" for="email">Work email</label>
+                <input id="email" name="email" type="email" required autocomplete="email" placeholder="name@company.com"
+                    style="padding:10px;border-radius:10px;border:1px solid rgba(201,168,106,.3);background:#0c1015;color:#e8ecf3">
+                <label class="muted" for="usecase">Use case (optional)</label>
+                <textarea id="usecase" name="usecase" rows="3" placeholder="Briefly describe what you’re building"
+                    style="padding:10px;border-radius:10px;border:1px solid rgba(201,168,106,.3);background:#0c1015;color:#e8ecf3"></textarea>
+                <input type="text" name="website" style="display:none"> <!-- honeypot -->
+                <div style="display:flex;gap:10px;align-items:center">
+                    <button class="btn" type="submit">Request Access</button>
+                    <span id="access-status" class="muted" aria-live="polite"></span>
+                </div>
+            </form>
+
+            <!-- Newsletter -->
+            <div class="card" style="padding:18px;margin-top:18px;display:grid;gap:10px">
+                <div class="title">Join the newsletter</div>
+                <p class="muted">Get early API updates and private beta invites.</p>
+                <form id="newsletter" style="display:flex;gap:10px;flex-wrap:wrap">
+                    <input id="nl-email" type="email" required placeholder="you@domain.com"
+                        style="flex:1;min-width:220px;padding:10px;border-radius:10px;border:1px solid rgba(201,168,106,.3);background:#0c1015;color:#e8ecf3">
+                    <button class="btn" type="submit">Subscribe</button>
+                    <span id="nl-status" class="muted" aria-live="polite"></span>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="wrap" style="display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px">
+            <div>
+                <div class="brand" style="gap:10px">
+                    <div class="mark"></div>ROTEC
+                </div>
+                <p class="muted" style="max-width:50ch">Bespoke AI models and platform engineering for products that
+                    demand refinement.</p>
+            </div>
+            <div>
+                <strong>Company</strong><br />
+                <a class="muted" href="#">About</a><br />
+                <a class="muted" href="#">Careers</a><br />
+                <a class="muted" href="#security">Security</a>
+            </div>
+            <div>
+                <strong>Developers</strong><br />
+                <a class="muted" href="#docs">Docs</a><br />
+                <a class="muted" href="#">Status</a><br />
+                <a class="muted" href="#changelog">Changelog</a>
+            </div>
+        </div>
+        <div class="wrap" style="margin-top:14px;color:var(--muted)">© <span id="year"></span> Rotec Labs — All rights
+            reserved.</div>
+    </footer>
+
+    <!-- Background Music + Toggle -->
+    <audio id="bg-music">
+        <source src="music/kanthara_title.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" aria-pressed="false" class="btn ghost"
+        style="position:fixed;right:16px;bottom:16px;z-index:60">Music</button>
+
+    <script>
+        // Theme toggle (persist to localStorage)
+        const themeBtn = document.getElementById('theme-toggle');
+        const setTheme = (t) => { document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); themeBtn.setAttribute('aria-pressed', String(t === 'light')); };
+        const saved = localStorage.getItem('theme'); if (saved) { setTheme(saved); }
+        themeBtn.onclick = () => { const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'; setTheme(cur); };
+
+        // Audio setup and toggle
+        const audio = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        audio.volume = 0.3; audio.muted = true;
+        const enableAudio = () => { audio.muted = false; audio.play().catch(() => { }); window.removeEventListener('click', enableAudio); window.removeEventListener('keydown', enableAudio); musicBtn.setAttribute('aria-pressed', 'true'); };
+        window.addEventListener('click', enableAudio, { once: true });
+        window.addEventListener('keydown', enableAudio, { once: true });
+        musicBtn.onclick = async () => { if (audio.paused) { await audio.play().catch(() => { }); musicBtn.setAttribute('aria-pressed', 'true'); } else { audio.pause(); musicBtn.setAttribute('aria-pressed', 'false'); } };
+
+        // Parallax hero image on scroll
+        const hero = document.getElementById('hero');
+        addEventListener('scroll', () => { const y = Math.min(120, scrollY * 0.25); hero.style.setProperty('--py', y + 'px'); });
+
+        // Reveal on view
+        const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }) }, { threshold: .2 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // Footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Live demo handler (sentiment)
+        const runBtn = document.getElementById('demo-run');
+        if (runBtn) {
+            runBtn.onclick = async () => {
+                const t = document.getElementById('demo-text').value.trim();
+                const s = document.getElementById('demo-status');
+                const o = document.getElementById('demo-out');
+                if (!t) { s.textContent = 'Type something.'; return; }
+                s.textContent = 'Running…'; o.textContent = '';
+                try {
+                    const r = await fetch('/api/predict', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: t }) });
+                    if (!r.ok) throw new Error('Bad response');
+                    const data = await r.json(); s.textContent = ''; o.textContent = JSON.stringify(data, null, 2);
+                } catch (e) {
+                    // Mocked result
+                    s.textContent = ''; o.textContent = JSON.stringify({ sentiment: t.match(/love|great|nice|fast|good/i) ? 'positive' : 'neutral', confidence: 0.73, mocked: true }, null, 2);
+                }
+            };
+        }
+
+        // Playground
+        const pgRun = document.getElementById('pg-run');
+        if (pgRun) {
+            pgRun.onclick = async () => {
+                const endpoint = (document.getElementById('pg-endpoint').value || '/api/predict').trim();
+                const model = document.getElementById('pg-model').value;
+                const temp = parseFloat(document.getElementById('pg-temp').value);
+                const prompt = document.getElementById('pg-input').value.trim();
+                const status = document.getElementById('pg-status');
+                const out = document.getElementById('pg-out');
+                if (!prompt) { status.textContent = 'Enter a prompt.'; return; }
+                status.textContent = 'Calling API…'; out.textContent = '';
+                try {
+                    const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model, temp, messages: [{ role: 'user', content: prompt }] }) });
+                    if (!r.ok) throw new Error('Request failed');
+                    const data = await r.json(); out.textContent = JSON.stringify(data, null, 2); status.textContent = '';
+                } catch (err) {
+                    // Fallback mock
+                    const mock = { id: 'mock-' + Date.now(), model, choices: [{ message: { role: 'assistant', content: `(mocked) Response for: ${prompt}` }, finish_reason: 'stop' }], usage: { prompt_tokens: Math.ceil(prompt.length / 4), completion_tokens: 18, total_tokens: Math.ceil(prompt.length / 4) + 18 }, temperature: temp };
+                    out.textContent = JSON.stringify(mock, null, 2); status.textContent = '';
+                }
+            }
+        }
+
+        // Access form (AJAX)
+        const accessForm = document.getElementById('access-form');
+        if (accessForm) {
+            accessForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const status = document.getElementById('access-status');
+                status.textContent = 'Sending…';
+                const formData = new FormData(accessForm);
+                try {
+                    const r = await fetch('/api/request-access', { method: 'POST', body: formData });
+                    if (!r.ok) throw new Error('Request failed');
+                    status.textContent = 'Thanks — we’ll be in touch!';
+                    accessForm.reset();
+                } catch (err) {
+                    status.textContent = 'Could not submit. Showing mock success.';
+                    setTimeout(() => { status.textContent = 'Thanks — we’ll be in touch!'; accessForm.reset(); }, 600);
+                }
+            });
+        }
+
+        // Newsletter (AJAX)
+        const nl = document.getElementById('newsletter');
+        if (nl) {
+            nl.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const status = document.getElementById('nl-status');
+                status.textContent = 'Subscribing…';
+                try {
+                    const r = await fetch('/api/newsletter', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: document.getElementById('nl-email').value }) });
+                    if (!r.ok) throw new Error('x');
+                    status.textContent = 'You’re in!'; nl.reset();
+                } catch (err) { status.textContent = 'You’re in! (mock)'; nl.reset(); }
+            })
+        }
+    </script>
+</body>
+
+</html>
